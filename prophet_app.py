@@ -50,8 +50,14 @@ st.markdown("Upload an Excel file to find seasonality and/or forecast time serie
 uploaded_file = st.file_uploader("Upload Excel File", type=["xlsx"])
 
 if uploaded_file:
-    df = pd.read_excel(uploaded_file)
-    st.success("File uploaded successfully!")
+    # Get all sheet names
+    excel_file = pd.ExcelFile(uploaded_file)
+    sheet_names = excel_file.sheet_names
+
+    # Let the user choose a sheet
+    sheet_choice = st.selectbox("Select Sheet", sheet_names)
+    df = pd.read_excel(excel_file, sheet_name=sheet_choice)
+    st.success(f"Loaded sheet: {sheet_choice}")
 
     st.subheader("Select Columns")
     account_col = st.selectbox("Account Column", df.columns)
