@@ -64,7 +64,8 @@ if uploaded_file:
     product_col = st.selectbox("Product Column", df.columns)
     date_col = st.selectbox("Date Column", df.columns)
     target_col = st.selectbox("Column to Forecast", df.columns)
-    forecast_periods = st.slider("Weeks to Forecast", 0, 104)
+    #forecast_periods = st.slider("Weeks to Forecast", 0, 104)
+    forecast_periods = st.number_input("Weeks to Forecast", min_value=0, value=0)
 
 
     if st.button("Run Forecast"):
